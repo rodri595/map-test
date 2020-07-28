@@ -6,6 +6,7 @@ module.exports = class {
     static async initModel() {
         if (! mapColl) {
             let _db = await db.getDB();
+            console.log("Database Succesfully Connected :", _db);
             mapColl = await _db.collection('markers');
             if (process.env.ENSUREINDEX == "1") {
                 await mapColl.createIndex({

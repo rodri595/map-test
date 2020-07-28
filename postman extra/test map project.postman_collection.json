@@ -1,0 +1,205 @@
+{
+    "info": {
+        "_postman_id": "5440b8b6-bcdf-41e9-bbfe-b738258f79aa",
+        "name": "test map project",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. auths test",
+            "item": [
+                {
+                    "name": "GET api ver noauth",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{HOST}}/",
+                            "host": ["{{HOST}}"],
+                            "path": [""]
+                        },
+                        "description": "test sin auth a la ruta /api/ normal first test"
+                    },
+                    "response": []
+                }, {
+                    "name": "GET api ver JWT",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{HOST}}/version",
+                            "host": ["{{HOST}}"],
+                            "path": ["version"]
+                        },
+                        "description": "VERIFY LOGIN AUTH WITH THIS API CALL"
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        }, {
+            "name": "2. login & Signin",
+            "item": [
+                {
+                    "name": "sign up",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "email",
+                                    "value": "rod@gmail.com",
+                                    "type": "text"
+                                }, {
+                                    "key": "password",
+                                    "value": "!Password123",
+                                    "type": "text"
+                                }, {
+                                    "key": "nombreCompleto",
+                                    "value": "Rodrigo el ADMIN",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{HOST}}/user/signin",
+                            "host": ["{{HOST}}"],
+                            "path": ["user", "signin"]
+                        },
+                        "description": "crear usaurio"
+                    },
+                    "response": []
+                }, {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "email",
+                                    "value": "rod@gmail.com",
+                                    "type": "text"
+                                }, {
+                                    "key": "pswd",
+                                    "value": "!Password123",
+                                    "type": "text"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "{{HOST}}/user/login",
+                            "host": ["{{HOST}}"],
+                            "path": ["user", "login"]
+                        },
+                        "description": "login "
+                    },
+                    "response": []
+                }
+            ],
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "id": "b8f0399d-f721-4769-8afa-ac19dd745513",
+                        "type": "text/javascript",
+                        "exec": [""]
+                    }
+                }, {
+                    "listen": "test",
+                    "script": {
+                        "id": "b606dd84-27cc-49b2-8920-8df84c6395b5",
+                        "type": "text/javascript",
+                        "exec": [""]
+                    }
+                }
+            ],
+            "protocolProfileBehavior": {}
+        }, {
+            "name": "3. markers",
+            "item": [
+                {
+                    "name": "Get All",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{HOST}}/map/",
+                            "host": ["{{HOST}}"],
+                            "path": ["map", ""]
+                        },
+                        "description": "FULL LIST OF MARKERS\r\n"
+                    },
+                    "response": []
+                }, {
+                    "name": "Create New",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "urlencoded",
+                            "urlencoded": [
+                                {
+                                    "key": "latitud",
+                                    "value": "14.846576365691364",
+                                    "type": "text"
+                                }, {
+                                    "key": "longitud",
+                                    "value": "-85.88287353515625",
+                                    "type": "text"
+                                }, {
+                                    "key": "msg",
+                                    "value": "Hello World -- >First Marker",
+                                    "type": "text"
+                                }
+                            ],
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{HOST}}/map/marker",
+                            "host": ["{{HOST}}"],
+                            "path": ["map", "marker"]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "protocolProfileBehavior": {}
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvZEBnbWFpbC5jb20iLCJyb2xlcyI6WyJzdGFuZGFyZCJdLCJzdGF0dXMiOiJBQ1QiLCJfaWQiOiI1ZjIwNTljNGQyNGFjMDE4OTg0NDllNTQiLCJpYXQiOjE1OTU5NTU2NTUsImV4cCI6MjE5NTk1NTU5NX0.evasHhkgwSZH8lj7SOuvCQJbQiecCc1rLz3kfvawpTE",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "83c6a1cf-89e9-4703-b83c-d2b10afdb172",
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }, {
+            "listen": "test",
+            "script": {
+                "id": "514c06ea-0913-48a3-8c31-97cdc38cbd05",
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }
+    ],
+    "protocolProfileBehavior": {}
+}

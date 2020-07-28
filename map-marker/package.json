@@ -2,7 +2,7 @@
     "name": "map-marker",
     "version": "0.1.1",
     "private": true,
-    "proxy": "http://localhost:3000",
+    "proxy": "http://localhost:3001",
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
@@ -12,6 +12,7 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-leaflet": "^2.7.0",
+        "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.1"
     },
     "scripts": {
@@ -25,14 +26,8 @@
     },
     "browserslist": {
         "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
+            ">0.2%", "not dead", "not op_mini all"
         ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+        "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
     }
 }
