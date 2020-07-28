@@ -20,14 +20,36 @@ router.get('/', async (req, res) => {
 });
 // get /
 
-privateRouter.get('/private', (req, res) => {
-    if (req.user.roles.includes('public') && true) {
-        res.status(200).json({"msg": req.user});
-    } else {
-        res.status(401).json({"msg": "No esta autorizado a usar esta ruta"});
-    }
+/**************************        NEW            **************************************/
+privateRouter.post('/marker', async (req, res) => {
+    try {
 
-})
+        if (req.user.roles.includes('standard') && true) {
+            var check = await model.findEmail(req.user._id, req.user.email);
+            if (check == 0) {
+                var {
+                    latitud,
+                    longitud,
+                    msg
+                } = req.body;
+                latitud = parseFloat(latitud);
+                longitud = parseFloat(longitud);
+                msg = msg;
+                const rslt = await model.addOne(req.user._id, req.user.email, latitud, longitud, msg);
+                res.status(200).json(rslt);
+            } else {
+                res.status(401).json({"error": "Ya Creaste un Marcador"});
+            }
+        } else {
+            res.status(401).json({"msg": "No esta autorizado crear un marcador"});
+        }
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({"Error": "Error al crear marcador"});
+    }
+});
+// post /new
 
 module.exports = {
     public: router,
