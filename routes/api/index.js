@@ -8,7 +8,10 @@ var extractJWT = passportJWT.ExtractJwt;
 var strategyJWT = passportJWT.Strategy;
 
 var userRoute = require('./user');
-// var mapRoute = require('./map');
+var {
+    pub,
+    priv
+} = require('./map');
 
 /**************************************************************************/
 
@@ -20,19 +23,18 @@ passport.use(new strategyJWT({
     return next(null, user);
 }))
 
-
-// public
+/**************************************************************************/
+// public pages
 router.use("/user", userRoute);
-
+router.use("/map", pub);
 router.get('/', (req, res, next) => {
     res.status(200).json({"version": "API ALFA ULTRA EARLY ACCESS"})
 });
 
-
-// private  {must login for jwt auth
+/**************************************************************************/
 const jwtAuthMiddleware = passport.authenticate('jwt', {session: false});
-// router.use("/map", jwtAuthMiddleware, mapRoute);
-
+// private pages must login for jwt auth
+router.use("/map", jwtAuthMiddleware, priv);
 
 router.get('/version', jwtAuthMiddleware, function (req, res) {
     res.status(200).json({"version": "API v1.0 FULL AUTH WORKING"});
