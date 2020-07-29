@@ -1,6 +1,6 @@
 import React from 'react';
 import Marcadores from './components/pages/marcadores/Marcadores';
-// import Login from './components/pages/login/Login';
+import Login from './components/pages/login/Login';
 // import SignIn from './components/pages/signin/SignIn';
 // import NewMarker from './components/pages/newmarker/NewMarker';
 import './app.css';
@@ -60,11 +60,11 @@ export default class extends React.Component {
                 <NRoute path="/"
                     component={Marcadores}
                     exact
-                    auth={auth}/> {/* <NRoute path="/login"
+                    auth={auth}/>
+                <NRoute path="/login"
                     component={Login}
                     exact
-                    auth={auth}/>
-                <NRoute path="/signin"
+                    auth={auth}/> {/* <NRoute path="/signin"
                     component={SignIn}
                     exact
                     auth={auth}/>

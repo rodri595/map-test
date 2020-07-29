@@ -2,7 +2,7 @@ import {paxios} from '../../utilities/axios';
 
 export const login = async (email, pswd) => {
     try {
-        const {data} = await paxios.post("/api/user/login", {
+        const {data} = await paxios.post("/user/login", {
             email: email,
             pswd: pswd
         });
