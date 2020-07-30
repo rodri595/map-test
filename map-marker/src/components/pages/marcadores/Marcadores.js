@@ -14,6 +14,8 @@ import {
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import {getall} from './axios';
+import {Redirect} from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 const {BaseLayer, Overlay} = LayersControl
 delete L.Icon.Default.prototype._getIconUrl;
@@ -28,6 +30,7 @@ export default class Marcadores extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            redirectTo: false,
             data: [],
             currentPos: null,
             location: {
@@ -51,6 +54,15 @@ export default class Marcadores extends Component {
             console.log(e);
         }
     }
+
+
+
+    onClickButtonModal(auth) {
+        auth ? console.log("open modal"): this.setState({redirectTo:true})   
+      
+      }
+
+
 
     fetchData() {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -77,6 +89,12 @@ export default class Marcadores extends Component {
 
 
     render() {
+
+        if (this.state.redirectTo) {
+            return (
+                <Redirect to={'/login'}/>
+            )
+        }
         return (<>
             <Map center={
                     [this.state.location.lat, this.state.location.lng]
@@ -85,7 +103,7 @@ export default class Marcadores extends Component {
                     this.state.zoom
                 }
                 minZoom={2.5}
-                maxZoom={18}
+                maxZoom={19}
                 onClick={
                     this.handleClick
             }>
@@ -106,12 +124,17 @@ export default class Marcadores extends Component {
                                     this.state.currentPos
                                 }
                                 draggable={true}>
-                                <Popup position={
-                                    this.state.currentPos
-                                }>
+                                    <Popup>
                                     Coordenadas:
                                     <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre>
-                                </Popup>
+
+                                    <Button onClick={()=>this.onClickButtonModal( this.props.auth.isLogged)} color="success">
+                                    {this.props.auth.isLogged ?
+                                    "Add New Marker": "Login"} 
+                                    </Button>
+                                    </Popup>
+
+                                
                             </Marker>
                         } </LayerGroup>
                     </Overlay>
