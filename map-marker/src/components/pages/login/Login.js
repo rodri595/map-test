@@ -101,7 +101,7 @@ export default class extends Component {
           <Col>
             <FormGroup>
                 <h3>Features</h3>
-                <p>Add Your Owen Marker and say Hi to evryone!</p>
+                <p>Add Your Own Marker and say Hi to everyone!</p>
             </FormGroup>
           </Col>
           <Col>
