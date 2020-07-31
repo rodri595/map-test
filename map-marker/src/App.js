@@ -2,7 +2,6 @@ import React from 'react';
 import Marcadores from './components/pages/marcadores/Marcadores';
 import Login from './components/pages/login/Login';
 import SignIn from './components/pages/signin/SignIn';
-import NewMarker from './components/pages/newmarker/NewMarker';
 import './app.css';
 
 import {Switch, BrowserRouter as Router} from 'react-router-dom';
@@ -97,10 +96,6 @@ export default class extends React.Component {
                         exact
                         auth={auth}/>
 
-                    <PRoute path="/marker"
-                        component={NewMarker}
-                        exact
-                        auth={auth}/>
                 </Switch>
             </Router>
         );

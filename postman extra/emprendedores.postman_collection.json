@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "173cc1e4-06b1-4c09-8c92-3c66f8c3a7cf",
+		"name": "emprendedores",
+		"description": "simple consumer for my new project emprendedores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. auths test",
+			"item": [
+				{
+					"name": "GET api ver noauth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "test sin auth a la ruta /api/ normal first test"
+					},
+					"response": []
+				},
+				{
+					"name": "GET api ver JWT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/version",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"version"
+							]
+						},
+						"description": "OVERIGY LOGIN AUTH WITH THIS API CALL"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "2. login & Signin",
+			"item": [
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "ever@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "!Sistemas911",
+									"type": "text"
+								},
+								{
+									"key": "nombreCompleto",
+									"value": "Ever Ramos",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/user/signin",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user",
+								"signin"
+							]
+						},
+						"description": "crear usaurio"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "rod@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "pswd",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/user/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						},
+						"description": "login "
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "3. emprendedor",
+			"item": [
+				{
+					"name": "rating",
+					"item": [
+						{
+							"name": "LIKE",
+							"item": [
+								{
+									"name": "LIKE",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{HOST}}/emprendedor/like/5f1e1da26f19cf1e24ecbf53",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"emprendedor",
+												"like",
+												"5f1e1da26f19cf1e24ecbf53"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "verify if page like",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{HOST}}/emprendedor/verifylike/5f1e1da26f19cf1e24ecbf53",
+											"host": [
+												"{{HOST}}"
+											],
+											"path": [
+												"emprendedor",
+												"verifylike",
+												"5f1e1da26f19cf1e24ecbf53"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/emprendedor/",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"emprendedor",
+								""
+							]
+						},
+						"description": "FULL LIST OF EMPRENDEDORES\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "envios@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "nombreCompleto",
+									"value": "Hugo",
+									"type": "text"
+								},
+								{
+									"key": "areas",
+									"value": "Envio de Paquetes",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/emprendedor/new",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"emprendedor",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FInd One Emprendedor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/emprendedor/5f1c6c8bd16c3922b4cf25b2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"emprendedor",
+								"5f1c6c8bd16c3922b4cf25b2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One Emprendedor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/emprendedor/del/5f1c6c8bd16c3922b4cf25b2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"emprendedor",
+								"del",
+								"5f1c6c8bd16c3922b4cf25b2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE One Emprendedor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "areas",
+									"value": "Programador",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "ACT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/emprendedor/upd/5f1c6c8bd16c3922b4cf25b2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"emprendedor",
+								"upd",
+								"5f1c6c8bd16c3922b4cf25b2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJvZEBnbWFpbC5jb20iLCJyb2xlcyI6WyJzdGFuZGFyZCJdLCJzdGF0dXMiOiJBQ1QiLCJfaWQiOiI1ZjE5Zjk4YmY1ZjdkNTBkZTg0YzljN2IiLCJpYXQiOjE1OTU2OTM2MDcsImV4cCI6MjE5NTY5MzU0N30.8QSSjpN6SnQjBFlubxfzDL6-ezwudLCd-_ivdaihufU",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2634223a-0cce-48bb-8287-4cff772c3d44",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5abdcbf0-081a-42c3-9745-48fa9f235b69",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

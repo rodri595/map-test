@@ -34,6 +34,7 @@ router.get('/', (req, res, next) => {
 
 /**************************************************************************/
 const jwtAuthMiddleware = passport.authenticate('jwt', {session: false});
+console.log(jwtAuthMiddleware);
 // private pages must login for jwt auth
 router.use("/map", jwtAuthMiddleware, private);
 

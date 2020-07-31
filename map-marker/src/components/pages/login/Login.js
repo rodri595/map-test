@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 import {login} from './axios';
 import './login.css';
-
+import {
+    Container, Col, Form,
+    FormGroup, Label, Input,
+    Button,Row
+  } from 'reactstrap';
 export default class extends Component {
     constructor() {
         super();
@@ -33,7 +37,7 @@ export default class extends Component {
                 this.props.auth.login(userData, jwt);
             });
         } catch (e) {
-            alert("Error al iniciar sesión.");
+            alert("Incorrect Credentials.");
         }
     }
     render() {
@@ -42,52 +46,76 @@ export default class extends Component {
             return (<Redirect to={tourl}/>)
         }
         return (<>
-            <div className="container">
-                    <div className="form-control">
-                        <label>Correo Electrónico</label>
-                        <input type="email" name="email"
-                            onChange={
-                                this.onTextChange
-                            }
-                            value={
-                                this.state.email
-                            }/>
-                    </div>
-                    <div className="form-control">
-                        <label>Password</label>
-                        <input type="password" name="password"
-                            onChange={
-                                this.onTextChange
-                            }
-                            value={
-                                this.state.password
-                            }/>
-                    </div>
-                    <button className="btn"
-                        onClick={
-                            this.onClickButton
-                    }>Iniciar Sesión</button>
-                    <small>Don't have an account?
-                        <a href="/signin">Sign up</a>
-                    </small>
+        <Container className="App">
 
-               
+        <Row>
+          <Col lg="6">
+        <Form className="form">
+            <FormGroup>
+              <Label>Email</Label>
+              <Input
+                type="email"
+                name="email"
+                onChange={
+                    this.onTextChange
+                }
+                value={
+                    this.state.email
+                }
+                placeholder="myemail@email.com"
+              />
+            </FormGroup>
 
-                <div className="features">
-                    <div className="feature">
-                        <h3>Development</h3>
-                        <p>A modern and clean design system of Map Ilustration</p>
-                    </div>
-                    <div className="feature">
-                        <h3>Features</h3>
-                        <p>Add Your Owen Marker and say Hi to evryone!</p>
-                    </div>
-                    <div className="feature">
-                        <h3>Updates</h3>
-                        <p>This is Version 1.2</p>
-                    </div>
-                </div>
-            </div>
+            <FormGroup>
+              <Label for="examplePassword">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                onChange={
+                    this.onTextChange
+                }
+                value={
+                    this.state.password
+                }
+                placeholder="********"
+              />
+            </FormGroup>
+            <small>Don't have an account?
+            <NavLink to="/signin"> Sign Up</NavLink>
+            </small>
+          <Button color="success" onClick={this.onClickButton}>Login</Button>
+        </Form>
+          </Col>
+
+         
+        <Col lg="6">
+        
+
+        <Form className="form">
+          <Col>
+            <FormGroup>
+                <h3>Development</h3>
+                <p>A modern and clean design system of Map Ilustration</p>
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+                <h3>Features</h3>
+                <p>Add Your Owen Marker and say Hi to evryone!</p>
+            </FormGroup>
+          </Col>
+          <Col>
+            <FormGroup>
+                <h3>Updates</h3>
+                <p>This is Version 1.2</p>
+            </FormGroup>
+          </Col>
+          
+        </Form>
+        </Col>
+        </Row>
+      </Container>
+
 
         </>);
     }

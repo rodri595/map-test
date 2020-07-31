@@ -5,7 +5,6 @@ import {
     TileLayer,
     Marker,
     Popup,
-    FeatureGroup,
     LayerGroup,
     LayersControl,
     CircleMarker,
@@ -13,9 +12,9 @@ import {
 } from 'react-leaflet'
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
-import {getall} from './axios';
+import {getall, marker} from './axios';
 import {Redirect} from 'react-router-dom';
-import { Button } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 
 const {BaseLayer, Overlay} = LayersControl
 delete L.Icon.Default.prototype._getIconUrl;
@@ -30,9 +29,13 @@ export default class Marcadores extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            openModal:false,
             redirectTo: false,
+            reload: false,
             data: [],
-            currentPos: null,
+            lat: "",
+            lng: "",
+            msg: "",
             location: {
                 lat: 0,
                 lng: 0
@@ -40,9 +43,13 @@ export default class Marcadores extends Component {
             zoom: 2
         };
         this.handleClick = this.handleClick.bind(this);
+        this.onTextChange = this.onTextChange.bind(this);
     }
     handleClick(e) {
-        this.setState({currentPos: e.latlng});
+        this.setState({
+            lat: e.latlng.lat,
+            lng: e.latlng.lng
+        });
     }
 
     async componentDidMount() {
@@ -55,13 +62,35 @@ export default class Marcadores extends Component {
         }
     }
 
-
-
-    onClickButtonModal(auth) {
-        auth ? console.log("open modal"): this.setState({redirectTo:true})   
+    onClickButtonLogin(e) {
+       this.setState({redirectTo:true})
+      }
+    onClickButtonModal(e) {
+        this.setState({
+            openModal: !this.state.openModal
+          });
       
       }
-
+      onTextChange(e){
+        const {name, value} = e.target;
+        this.setState({[name]:value});
+      }
+      async onClickButtonMarker() {
+        try {
+            let check =await marker(this.state.lat,this.state.lng,this.state.msg);
+            if(check){
+                this.setState({
+                    "reload": true
+                });
+            }
+            else{
+                alert("Error al crear Marcador 1.");
+            }
+           
+        } catch (e) {
+            alert("Error al crear Marcador 2.");
+        }
+      }
 
 
     fetchData() {
@@ -87,12 +116,16 @@ export default class Marcadores extends Component {
 
     }
 
-
     render() {
 
         if (this.state.redirectTo) {
             return (
                 <Redirect to={'/login'}/>
+            )
+        }
+        if (this.state.reload) {
+            return (
+                <Redirect to={'/'}/>
             )
         }
         return (<>
@@ -103,7 +136,7 @@ export default class Marcadores extends Component {
                     this.state.zoom
                 }
                 minZoom={2.5}
-                maxZoom={19}
+                maxZoom={20}
                 onClick={
                     this.handleClick
             }>
@@ -120,18 +153,47 @@ export default class Marcadores extends Component {
 
                     <Overlay checked name="New Marker">
                         <LayerGroup> {
-                            this.state.currentPos && <Marker position={
-                                    this.state.currentPos
+                            this.state.lat && <Marker position={
+                                    [this.state.lat,this.state.lng]
                                 }
                                 draggable={true}>
                                     <Popup>
-                                    Coordenadas:
-                                    <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre>
+                                    Coords:
+                                    <pre>Latitude : {this.state.lat} <br/>
+                                        Longitude : {this.state.lng}</pre>
 
-                                    <Button onClick={()=>this.onClickButtonModal( this.props.auth.isLogged)} color="success">
+                                    <Modal isOpen={this.state.openModal} >
+                                        <ModalHeader>Add New Marker</ModalHeader>
+                                        <ModalBody>
+
+                                        
+
+                                            <label>latitude</label>
+                                            <input type="number" name="lat" disabled value={this.state.lat}  />
+               
+
+                                       
+                                            <label>longitude</label>
+                                            <input type="number" name="lng" disabled value={this.state.lng}   />
+                               
+                                    
+                                            <label>Message</label>
+                                            <input type="text" name="msg" onChange={this.onTextChange} />
+                                       
+
+                                        </ModalBody>
+                                        <ModalFooter>
+                                        <Button  onClick={()=>this.onClickButtonMarker()}color="primary">Create</Button>
+
+                                        <Button onClick={()=>this.onClickButtonModal()} color="secondary">Cancel</Button>
+                                        </ModalFooter>
+                                    </Modal>
+
+                                    
                                     {this.props.auth.isLogged ?
-                                    "Add New Marker": "Login"} 
-                                    </Button>
+                                    <Button onClick={()=>this.onClickButtonModal()} color="success">Add</Button>
+                                    : <Button onClick={()=>this.onClickButtonLogin()} outline color="info">Login</Button>} 
+
                                     </Popup>
 
                                 
@@ -184,14 +246,7 @@ export default class Marcadores extends Component {
                         permanent
                         interactive={true}>
                         <div>
-                            Hello, I´m
-                            <strong>
-                                Rodrigo Erazo
-                            </strong>
-                            From
-                            <strong>
-                                Honduras
-                            </strong>
+                            Hello, I´m <strong>Rodrigo Erazo </strong>From <strong>Honduras</strong>
                             <br/>If you want to
                             <a href="https://paypal.me/rodrigoerazo595" target="_blank">Support me</a><br/>you can buy me a Beer here
                         </div>

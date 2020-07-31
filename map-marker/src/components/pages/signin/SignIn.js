@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import {signin} from './axios';
-import {Redirect} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
+import {
+    Container, Col, Form,
+    FormGroup, Label, Input,
+    Button,Row
+  } from 'reactstrap';
 export default class extends Component {
   constructor() {
     super();
@@ -42,41 +47,78 @@ export default class extends Component {
         )
     }
     return (<>
-    <div className="container">
+    <Container className="App">
+            <Row>
+            <Col lg="6">
+            <Form className="form">
+                <FormGroup>
+                <Label>Email</Label>
+                <Input
+                    type="email" name="email" onChange={this.onTextChange}
+                    value={this.state.email}
+                    placeholder="myemail@email.com"
+                />
+                </FormGroup>
+                
+                <FormGroup>
+                <Label>Full Name</Label>
+                <Input
+                    type="text" name="nombreCompleto" onChange={this.onTextChange}
+                    value={this.state.nombreCompleto}
+                    placeholder="John Doe"
+                />
+                </FormGroup>
 
-        <div className="form-control">
-            <label>Correo Electrónico</label>
-            <input type="email" name="email" onChange={this.onTextChange} value={this.state.email} />
-        </div>
+                <FormGroup>
+                <Label for="examplePassword">Password</Label>
+                <Input
+                    type="password"
+                    name="password"
+                    onChange={
+                        this.onTextChange
+                    }
+                    value={
+                        this.state.password
+                    }
+                    placeholder="********"
+                />
+                </FormGroup>
+                <small>Do have an account?
+                <NavLink to="/login"> Login</NavLink>
+                </small>
+            <Button color="success" onClick={this.onClickButton}>Create Account</Button>
+            </Form>
+            </Col>
 
-        <div className="form-control">
-            <label>Nombre Completo</label>
-            <input type="text" name="nombreCompleto" onChange={this.onTextChange} value={this.state.nombreCompleto} />
-        </div>
-
-        <div className="form-control">
-            <label>Password</label>
-            <input type="password" name="password" onChange={this.onTextChange} value={this.state.password} />
-        </div>]
-
-        <button className="btn" onClick={this.onClickButton}>Sign In</button>
+            
+            <Col lg="6">
 
 
-        <div className="features">
-            <div className="feature">
-                <h3>Development</h3>
-                <p>Create Your Account and leave a message on the map</p>
-            </div>
-            <div className="feature">
-                <h3>Features</h3>
-                <p>Fully Functional and Responsive Map</p>
-            </div>
-            <div className="feature">
-                <h3>Updates</h3>
-                <p>This is Version 1.2</p>
-            </div>
-        </div>
-    </div>
+            <Form className="form">
+            <Col>
+                <FormGroup>
+                    <h3>Development</h3>
+                    <p>A modern and clean design system of Map Ilustration</p>
+                </FormGroup>
+            </Col>
+            <Col>
+                <FormGroup>
+                    <h3>Features</h3>
+                    <p>Add Your Owen Marker and say Hi to evryone!</p>
+                </FormGroup>
+            </Col>
+            <Col>
+                <FormGroup>
+                    <h3>Updates</h3>
+                    <p>This is Version 1.2</p>
+                </FormGroup>
+            </Col>
+            
+            </Form>
+            </Col>
+            </Row>
+            </Container>
+
 </>
     )
   }
