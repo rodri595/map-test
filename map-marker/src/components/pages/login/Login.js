@@ -80,10 +80,14 @@ export default class extends Component {
                 placeholder="********"
               />
             </FormGroup>
+
             <small>Don't have an account?
             <NavLink to="/signin"> Sign Up</NavLink>
             </small>
+          <br/>
           <Button color="success" onClick={this.onClickButton}>Login</Button>
+
+
         </Form>
           </Col>
 

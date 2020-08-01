@@ -83,9 +83,14 @@ export default class extends Component {
                     placeholder="********"
                 />
                 </FormGroup>
+                <small>Must Have minimum 8 characters and 1 Mayus Letter and 1 "!@#$%" character</small>
+                <br/>
+                <br/>
                 <small>Do have an account?
                 <NavLink to="/login"> Login</NavLink>
                 </small>
+                <br/>
+                <br/>
             <Button color="success" onClick={this.onClickButton}>Create Account</Button>
             </Form>
             </Col>

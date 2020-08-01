@@ -13,8 +13,8 @@ import {
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import {getall, marker} from './axios';
-import {Redirect} from 'react-router-dom';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
+import {Redirect,NavLink} from 'react-router-dom';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col ,FormGroup ,Form } from 'reactstrap';
 
 const {BaseLayer, Overlay} = LayersControl
 delete L.Icon.Default.prototype._getIconUrl;
@@ -23,6 +23,11 @@ L.Icon.Default.mergeOptions({iconRetinaUrl: require('leaflet/dist/images/marker-
 export const funny = new L.Icon({
     iconUrl: 'https://image.flaticon.com/icons/svg/817/817760.svg',
     iconSize: [30, 30]
+});
+
+export const helper = new L.Icon({
+    iconUrl: './clippy.png',
+    iconSize: [100, 100]
 });
 
 export default class Marcadores extends Component {
@@ -165,22 +170,24 @@ export default class Marcadores extends Component {
                                     <Modal isOpen={this.state.openModal} >
                                         <ModalHeader>Add New Marker</ModalHeader>
                                         <ModalBody>
-
-                                        
-
-                                            <label>latitude</label>
+                                        <Form>
+                                        <FormGroup>
+                                            <label>Latitude : </label>
                                             <input type="number" name="lat" disabled value={this.state.lat}  />
+                                            </FormGroup>
+                                            <FormGroup>
+                                  
                
-
-                                       
-                                            <label>longitude</label>
+                                            <label>Longitude : </label>
                                             <input type="number" name="lng" disabled value={this.state.lng}   />
-                               
-                                    
-                                            <label>Message</label>
-                                            <input type="text" name="msg" onChange={this.onTextChange} />
-                                       
-
+                                            </FormGroup>
+      <FormGroup>
+                                        
+                              
+                                            <label>Message : </label><br/>
+                                            <input type="textarea" name="msg" onChange={this.onTextChange} />
+                                            </FormGroup>
+                                            </Form>
                                         </ModalBody>
                                         <ModalFooter>
                                         <Button  onClick={()=>this.onClickButtonMarker()}color="primary">Create</Button>
@@ -193,6 +200,7 @@ export default class Marcadores extends Component {
                                     {this.props.auth.isLogged ?
                                     <Button onClick={()=>this.onClickButtonModal()} color="success">Add</Button>
                                     : <Button onClick={()=>this.onClickButtonLogin()} outline color="info">Login</Button>} 
+                                     
 
                                     </Popup>
 
@@ -234,6 +242,20 @@ export default class Marcadores extends Component {
                     </Overlay>
 
                 </LayersControl>
+
+                <Marker position={[21.207456238350304 ,-87.5526900846057]}  icon={helper}>
+                    <Tooltip sticky direction="left"offset={[-8, -2]} opacity={1} interactive={true} permanent>
+                            <div>
+                                Welcome to Social Map, click on any location on the map to set a Point.<br/>
+                                After the marker setup click On again to check your locations and add your messsage.<br/>
+                                <strong>Make Sure to Login!</strong>
+                                <br/>
+                                If you dont have an account, you can
+                                <NavLink to="/signin"> Sign Up</NavLink>
+
+                            </div>
+                    </Tooltip>
+                </Marker>
                 <CircleMarker center={
                         [14.059685, -87.218065]
                     }
@@ -248,7 +270,7 @@ export default class Marcadores extends Component {
                         <div>
                             Hello, I´m <strong>Rodrigo Erazo </strong>From <strong>Honduras</strong>
                             <br/>If you want to
-                            <a href="https://paypal.me/rodrigoerazo595" target="_blank">Support me</a><br/>you can buy me a Beer here
+                            <a href="https://paypal.me/rodrigoerazo595" target="_blank">Support me</a><br/>you can buy me coffee
                         </div>
                     </Tooltip>
                 </CircleMarker>
