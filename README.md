@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Acklen Test Project 👋</h1>
+<h1 align="center">Welcome to Map Social Test Project 👋</h1>
 <p>
   <a href="https://twitter.com/ErazoAndree" target="_blank">
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
